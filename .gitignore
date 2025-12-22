@@ -126,6 +126,10 @@ public
 tmp/
 temp/
 
+# Nested Git repositories (submodules)
+**/.git/
+.git/
+
 # Editor directories and files
 .vscode/
 .idea/
