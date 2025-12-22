@@ -23,8 +23,6 @@ The **House of EdTech** platform is an intelligent assignment management system 
 
 ![Sign Up Page](documents/signup.png)
 
-![Dashboard Screenshot 1](documents/Screenshot%202025-12-22%20224333.png)
-
 ![Dashboard Screenshot 2](documents/Screenshot%202025-12-23%20000430.png)
 
 ![Dashboard Screenshot 3](documents/Screenshot%202025-12-23%20000444.png)
