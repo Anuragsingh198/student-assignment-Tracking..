@@ -33,7 +33,7 @@ const configSchema = z.object({
 
   // AI Service Configuration
   AI_SERVICE_API_KEY: z.string().optional(),
-  AI_SERVICE_BASE_URL: z.string().url().optional(),
+  AI_SERVICE_BASE_URL: z.union([z.string().url(), z.literal('')]).optional(),
 
   // CORS Configuration
   CORS_ORIGIN: z.string().default('http://localhost:3000'),

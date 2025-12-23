@@ -11,14 +11,15 @@ import { CreateAssignmentForm } from "./create-assignment-form";
 import { EditAssignmentForm } from "./edit-assignment-form";
 
 interface Assignment {
-  id: string;
+  id?: string;
+  _id?: string;
   title: string;
   description: string;
   dueDate: string;
   status: string;
   createdAt: string;
   updatedAt: string;
-  allowedSubmissionType?: string;
+  allowedSubmissionType?: 'TEXT' | 'FILE';
   maxScore?: number;
 }
 
@@ -81,12 +82,9 @@ export function AssignmentsList() {
         {assignments.length === 0 ? (
           <div className="text-center py-8">
             <p className="text-muted-foreground">No assignments created yet.</p>
-            <CreateAssignmentForm onSuccess={() => fetchAssignments()}>
-              <Button className="mt-4">
-                <Plus className="mr-2 h-4 w-4" />
-                Create Your First Assignment
-              </Button>
-            </CreateAssignmentForm>
+            <div className="mt-4">
+              <CreateAssignmentForm onSuccess={() => fetchAssignments()} />
+            </div>
           </div>
         ) : (
           assignments.map((assignment) => (

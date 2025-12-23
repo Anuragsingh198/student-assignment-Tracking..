@@ -9,7 +9,8 @@ import { Clock, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { assignmentApi, submissionApi } from "@/lib/api";
 
 interface Assignment {
-  id: string;
+  id?: string;
+  _id?: string;
   title: string;
   description: string;
   dueDate: string;

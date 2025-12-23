@@ -24,7 +24,7 @@ interface Assignment {
 }
 
 interface Submission {
-  assignmentId: string | { _id: string };
+  assignmentId: string | { _id?: string; id?: string };
   status: string;
   score?: number;
 }

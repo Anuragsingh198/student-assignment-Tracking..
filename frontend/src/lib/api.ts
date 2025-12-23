@@ -117,6 +117,8 @@ export const assignmentApi = {
     title: string;
     description: string;
     dueDate: string;
+    allowedSubmissionType?: 'TEXT' | 'FILE';
+    maxScore?: number;
     rubricId?: string;
   }) => {
     return apiRequest<{ assignment: any }>('/assignments', {
@@ -129,6 +131,8 @@ export const assignmentApi = {
     title: string;
     description: string;
     dueDate: string;
+    allowedSubmissionType?: 'TEXT' | 'FILE';
+    maxScore?: number;
     rubricId?: string;
   }>) => {
     return apiRequest<{ assignment: any }>(`/assignments/${id}`, {

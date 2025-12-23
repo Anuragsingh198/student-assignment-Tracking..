@@ -15,12 +15,8 @@ import { assignmentApi } from "@/lib/api";
 const createAssignmentSchema = z.object({
   title: z.string().min(1, "Title is required").max(200, "Title must be less than 200 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
-  dueDate: z.date({
-    required_error: "Due date is required",
-  }).refine((date) => date > new Date(), "Due date must be in the future"),
-  allowedSubmissionType: z.enum(["TEXT", "FILE"], {
-    required_error: "Submission type is required",
-  }),
+  dueDate: z.date().refine((date) => date > new Date(), "Due date must be in the future"),
+  allowedSubmissionType: z.enum(["TEXT", "FILE"]),
   maxScore: z.number().min(0, "Score must be positive").max(1000, "Score cannot exceed 1000"),
 });
 

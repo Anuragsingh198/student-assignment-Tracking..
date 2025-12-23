@@ -16,7 +16,8 @@ interface AssignmentSubmissionProps {
 }
 
 interface Assignment {
-  id: string;
+  id?: string;
+  _id?: string;
   title: string;
   description: string;
   dueDate: string;

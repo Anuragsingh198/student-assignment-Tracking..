@@ -17,29 +17,28 @@ import { ReactNode } from "react";
 const editAssignmentSchema = z.object({
   title: z.string().min(1, "Title is required").max(200, "Title must be less than 200 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
-  dueDate: z.date({
-    required_error: "Due date is required",
-  }).refine((date) => date > new Date(), "Due date must be in the future"),
-  allowedSubmissionType: z.enum(["TEXT", "FILE"], {
-    required_error: "Submission type is required",
-  }),
+  dueDate: z.date().refine((date) => date > new Date(), "Due date must be in the future"),
+  allowedSubmissionType: z.enum(["TEXT", "FILE"]),
   maxScore: z.number().min(0, "Score must be positive").max(1000, "Score cannot exceed 1000"),
 });
 
 type EditAssignmentFormData = z.infer<typeof editAssignmentSchema>;
 
 interface Assignment {
-  id: string;
+  id?: string;
+  _id?: string;
   title: string;
   description: string;
   dueDate: string;
   status: string;
   createdAt: string;
   updatedAt: string;
+  allowedSubmissionType?: 'TEXT' | 'FILE';
+  maxScore?: number;
 }
 
 interface EditAssignmentFormProps {
-  assignment: Assignment;
+  assignment: Assignment & { allowedSubmissionType?: 'TEXT' | 'FILE' | string; maxScore?: number };
   children: ReactNode;
   onSuccess?: () => void;
 }
@@ -70,7 +69,12 @@ export function EditAssignmentForm({ assignment, children, onSuccess }: EditAssi
     setError("");
 
     try {
-      await assignmentApi.update(assignment.id, {
+      const assignmentId = assignment.id || assignment._id;
+      if (!assignmentId) {
+        setError("Assignment ID is missing");
+        return;
+      }
+      await assignmentApi.update(assignmentId, {
         title: data.title,
         description: data.description,
         dueDate: data.dueDate.toISOString(),
