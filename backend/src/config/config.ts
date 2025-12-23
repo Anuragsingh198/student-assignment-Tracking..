@@ -20,7 +20,7 @@ const configSchema = z.object({
 
   // Rate Limiting
   RATE_LIMIT_WINDOW_MS: z.coerce.number().default(900000), // 15 minutes
-  RATE_LIMIT_MAX_REQUESTS: z.coerce.number().default(100),
+  RATE_LIMIT_MAX_REQUESTS: z.coerce.number().default(1000),
 
   // File Upload Configuration
   MAX_FILE_SIZE: z.coerce.number().default(10485760), // 10MB
@@ -30,10 +30,6 @@ const configSchema = z.object({
   CLOUDINARY_CLOUD_NAME: z.string().default('dhw4acerz'),
   CLOUDINARY_API_KEY: z.string().default('384713789766646'),
   CLOUDINARY_API_SECRET: z.string().default('yOUwuJ7kQ0u4ZqYKsEhal-WrU6I'),
-
-  // AI Service Configuration
-  AI_SERVICE_API_KEY: z.string().optional(),
-  AI_SERVICE_BASE_URL: z.union([z.string().url(), z.literal('')]).optional(),
 
   // CORS Configuration
   CORS_ORIGIN: z.string().default('http://localhost:3000'),

@@ -5,7 +5,6 @@ import compression from 'compression';
 import rateLimit from 'express-rate-limit';
 import { config } from './config/config';
 import { errorHandler, notFoundHandler } from './middleware/error.middleware';
-import { aiService } from './services/ai.service';
 import cloudinaryService from './services/cloudinary.service';
 
 // Import routes
@@ -35,8 +34,10 @@ import evaluationRoutes from './routes/evaluation.routes';
 
 const app = express();
 
+// Trust proxy for Vercel deployment
+app.set('trust proxy', 1);
+
 // Initialize services
-aiService.initialize().catch(console.error);
 // Cloudinary service is initialized when imported
 
 // Security middleware
@@ -144,7 +145,6 @@ app.get('/api/docs', (req, res) => {
         evaluate: 'POST /api/evaluations/:submissionId (Teacher)',
         getFeedback: 'GET /api/evaluations/feedback/:submissionId',
         updateFeedback: 'PUT /api/evaluations/feedback/:submissionId (Teacher)',
-        generateAIFeedback: 'POST /api/evaluations/ai-feedback/:submissionId (Teacher)',
       },
     },
   });

@@ -57,9 +57,6 @@ export interface IFeedback {
   submissionId: string;
   teacherId: string;
   comments: string;
-  aiSuggestedFeedback?: string;
-  grammarScore?: number;
-  clarityScore?: number;
   createdAt: Date;
 }
 
@@ -121,10 +118,4 @@ export interface ICreateSubmissionRequest {
 export interface IEvaluationRequest {
   score: number;
   comments: string;
-}
-
-export interface IAIFeedbackResponse {
-  suggestedFeedback: string;
-  grammarScore: number;
-  clarityScore: number;
 }

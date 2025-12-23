@@ -23,21 +23,6 @@ const feedbackSchema = new Schema<IFeedbackDocument>(
       minlength: [10, 'Comments must be at least 10 characters long'],
       maxlength: [2000, 'Comments cannot exceed 2000 characters'],
     },
-    aiSuggestedFeedback: {
-      type: String,
-      trim: true,
-      maxlength: [2000, 'AI suggested feedback cannot exceed 2000 characters'],
-    },
-    grammarScore: {
-      type: Number,
-      min: [0, 'Grammar score cannot be negative'],
-      max: [100, 'Grammar score cannot exceed 100'],
-    },
-    clarityScore: {
-      type: Number,
-      min: [0, 'Clarity score cannot be negative'],
-      max: [100, 'Clarity score cannot exceed 100'],
-    },
   },
   {
     timestamps: true,
@@ -54,17 +39,5 @@ const feedbackSchema = new Schema<IFeedbackDocument>(
 // Indexes for efficient queries
 feedbackSchema.index({ teacherId: 1 });
 feedbackSchema.index({ createdAt: -1 });
-
-// Virtual for overall quality score (average of grammar and clarity)
-feedbackSchema.virtual('overallQualityScore').get(function (this: IFeedbackDocument) {
-  if (this.grammarScore !== undefined && this.clarityScore !== undefined) {
-    return Math.round((this.grammarScore + this.clarityScore) / 2);
-  }
-  return undefined;
-});
-
-// Ensure virtual fields are serialized
-feedbackSchema.set('toJSON', { virtuals: true });
-feedbackSchema.set('toObject', { virtuals: true });
 
 export const Feedback = mongoose.model<IFeedbackDocument>('Feedback', feedbackSchema);
