@@ -14,7 +14,7 @@ lerna-debug.log*
 !.yarn/versions
 
 # Environment Variables
-# .env
+.env
 .env.local
 .env.development.local
 .env.test.local
